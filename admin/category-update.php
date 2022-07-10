@@ -6,15 +6,16 @@ if(isset ($_GET["updateId"])) {
     $categoryName = $_POST["categoryName"];
     $categoryType = $_POST["categoryType"];
 
-    $sql (mysqli_query($conn, "UPDATE category SET category_name='$categoryName', category_type='$categoryType' WHERE category_id='$categoryId')"));
+    $sql = "UPDATE category SET `category_name`='$categoryName',
+            `category_type`='$categoryType' WHERE `category_id`='$categoryId'" ;
+    $res = mysql_query($sql) or trigger_error(mysql_error()." in ".$sql);
 
-      if($sql) {
-          echo "<script>alert('Category has been updated');
-                  window.location.href='categories.php';  
-              </script>";
-      } else {
-          die(mysqli_error($conn));
-      }
+    if($res) {
+        echo "<script>alert('Category has been updated');
+                window.location.href='categories.php';  
+            </script>";
+        
+    } 
   }
 ?>
 
@@ -49,10 +50,10 @@ if(isset ($_GET["updateId"])) {
   <div class="container">
     <div class="card">
         <div class="card-body">
-          <h4 class="card-title">Update Product</h4>
+          <h4 class="card-title">Update Category</h4>
           <hr class="my-4">
 
-          <form method="POST" action="product-update.php">
+          <form method="POST" action="category-update.php">
           <?php
             $sql=mysqli_query($conn, "select * from category where category_id='".$_GET["updateId"]."'");
             while($data=mysqli_fetch_array($sql, MYSQLI_BOTH))
@@ -61,12 +62,12 @@ if(isset ($_GET["updateId"])) {
           <input type="hidden" name="categoryId" value="<?php echo $data["category_id"];?>">
 
           <div class="form-group">
-            <label for="categoryName" class="form-label">Product Name</label>
+            <label for="categoryName" class="form-label">Category Name</label>
             <input type="text" class="form-control" id="categoryName" name="categoryName" value="<?php echo $data["category_name"];?>">
           </div>
 
           <div class="form-group">
-            <label for="categoryType" class="form-label">Product Name</label>
+            <label for="categoryType" class="form-label">Category Name</label>
             <input type="text" class="form-control" id="categoryType" name="categoryType" value="<?php echo $data["category_type"];?>">
           </div>
           
@@ -74,7 +75,7 @@ if(isset ($_GET["updateId"])) {
             }?>
           <div class="float-right mt-3">
             <button type="submit" name="submit" class="btn btn-success px-4">
-              Update Product
+              Update Category
             </button>
           </div>
         </form>
