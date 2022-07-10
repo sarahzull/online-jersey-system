@@ -1,0 +1,10 @@
+<?php
+//database connection file
+$dbuser="root";
+$dbpass="";
+$dbhost="localhost";
+$dbname="ethereal beauty db";
+ 
+$conn = mysqli_connect($dbhost,$dbuser,$dbpass,$dbname);
+
+?>
