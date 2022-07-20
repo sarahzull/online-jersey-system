@@ -1,7 +1,7 @@
 <?php
 session_start();
 /* include db connection file */
-include("dbconn.php");
+include("connection.php");
 
 /* capture values from HTML form */
 $username = $_POST['username'];

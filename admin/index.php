@@ -1,3 +1,6 @@
+<?php 
+session_start();
+?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -19,10 +22,8 @@
           <p class="lead">What to do today?</p>
           <hr class="my-4">
           <div id="whattodo" class="list-group">
-            <a class="list-group-item list-group-item-action" href="order-details.php">View Order Details</a>
-            <a class="list-group-item list-group-item-action" href="#list-item-2">Proof Payment</a>
-            <a class="list-group-item list-group-item-action" href="#list-item-3">Accept Successful Order</a>
-            <a class="list-group-item list-group-item-action" href="#list-item-4">View Shipping</a>
+            <a class="list-group-item list-group-item-action" href="orders.php">View Orders</a>
+            <a class="list-group-item list-group-item-action" href="shipping.php">View Shipping</a>
           </div>
         </div>
       </div>

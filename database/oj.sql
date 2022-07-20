@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jul 03, 2022 at 02:56 PM
+-- Generation Time: Jul 18, 2022 at 04:31 PM
 -- Server version: 8.0.28
 -- PHP Version: 7.4.19
 
@@ -30,7 +30,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `brand` (
   `brand_id` int NOT NULL,
   `brand_name` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `brand`
@@ -50,17 +50,20 @@ INSERT INTO `brand` (`brand_id`, `brand_name`) VALUES
 
 CREATE TABLE `category` (
   `category_id` int NOT NULL,
-  `category_name` varchar(255) NOT NULL,
-  `category_type` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+  `category_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `category_type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `category`
 --
 
-INSERT INTO `category` (`category_id`, `category_name`, `category_type`) VALUES
-(1, 'player issue', 'unisex'),
-(2, 'fans issue', 'unisex');
+INSERT INTO `category` (`category_id`, `category_name`, `category_type`, `created_at`, `updated_at`) VALUES
+(1, 'player issue', 'unisex', NULL, NULL),
+(2, 'fans issue', 'unisex', NULL, NULL),
+(4, 'test', 'Unisex', '2022-07-05 13:59:00', NULL);
 
 -- --------------------------------------------------------
 
@@ -73,12 +76,12 @@ CREATE TABLE `jersey` (
   `brand_id` int NOT NULL,
   `category_id` int NOT NULL,
   `jersey_price` int DEFAULT NULL,
-  `jersey_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `jersey_size` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `jersey_image` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `jersey_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `jersey_size` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `jersey_image` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `jersey`
@@ -103,8 +106,7 @@ INSERT INTO `jersey` (`jersey_id`, `brand_id`, `category_id`, `jersey_price`, `j
 (1016, 1, 2, 40, 'Chelsea Training Kit', 'S', 'product-4.jpg', NULL, '0000-00-00 00:00:00'),
 (1017, 1, 2, 40, 'Inter Milan Away Kit', 'S', 'product-5.jpg', NULL, '0000-00-00 00:00:00'),
 (1018, 1, 2, 40, 'Inter Milan Home Kit', 'S', 'product-6.jpg', NULL, '0000-00-00 00:00:00'),
-(1019, 2, 2, 40, 'Man United Third Kit', 'S', 'product-7.jpg', NULL, '0000-00-00 00:00:00'),
-(1024, 1, 2, 50, 'Liverpool Training Kit', 'S', '', '2022-07-03 04:27:02', '0000-00-00 00:00:00');
+(1019, 2, 2, 40, 'Man United Third Kit', 'S', 'product-7.jpg', NULL, '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -115,8 +117,20 @@ INSERT INTO `jersey` (`jersey_id`, `brand_id`, `category_id`, `jersey_price`, `j
 CREATE TABLE `orders` (
   `orders_id` int NOT NULL,
   `user_id` int DEFAULT NULL,
-  `orders_date` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+  `orders_date` date DEFAULT NULL,
+  `proof` longblob,
+  `status` int NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`orders_id`, `user_id`, `orders_date`, `proof`, `status`) VALUES
+(1, 14, '2022-07-12', NULL, 1),
+(10, 8, '2021-07-12', NULL, 2),
+(11, 9, '2021-07-12', NULL, 2),
+(12, 10, '2021-07-13', NULL, 3);
 
 -- --------------------------------------------------------
 
@@ -129,8 +143,23 @@ CREATE TABLE `order_details` (
   `jersey_id` int DEFAULT NULL,
   `orders_id` int DEFAULT NULL,
   `quantity` int DEFAULT NULL,
-  `total_price` decimal(5,2) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+  `total_price` decimal(5,2) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `order_details`
+--
+
+INSERT INTO `order_details` (`id`, `jersey_id`, `orders_id`, `quantity`, `total_price`) VALUES
+(11, 1001, 10, 1, NULL),
+(12, 1001, 1, 2, NULL),
+(14, 1011, 11, 3, NULL),
+(15, 1011, 1, 1, NULL),
+(16, 1011, 12, 1, NULL),
+(17, 1012, 12, 4, NULL),
+(18, 1012, 11, 2, NULL),
+(19, 1012, 10, 1, NULL),
+(20, 1015, 11, 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -142,7 +171,7 @@ CREATE TABLE `payment` (
   `payment_id` int NOT NULL,
   `orders_id` int DEFAULT NULL,
   `payment_status` varchar(100) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
@@ -153,7 +182,7 @@ CREATE TABLE `payment` (
 CREATE TABLE `role` (
   `role_id` int NOT NULL,
   `role_tittle` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `role`
@@ -177,7 +206,7 @@ CREATE TABLE `user` (
   `user_address` varchar(255) NOT NULL,
   `user_password` varchar(255) NOT NULL,
   `user_email` varchar(200) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `user`
@@ -253,16 +282,22 @@ ALTER TABLE `user`
 --
 
 --
+-- AUTO_INCREMENT for table `category`
+--
+ALTER TABLE `category`
+  MODIFY `category_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT for table `jersey`
 --
 ALTER TABLE `jersey`
-  MODIFY `jersey_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1025;
+  MODIFY `jersey_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1026;
 
 --
 -- AUTO_INCREMENT for table `order_details`
 --
 ALTER TABLE `order_details`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `payment`

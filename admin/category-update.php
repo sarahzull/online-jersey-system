@@ -1,21 +1,25 @@
-<?php include('connection.php'); 
+<?php 
+session_start();
+include('connection.php'); 
+if(isset ($_GET['updateId'])) {
+  if(isset($_POST['submit'])) {
+    $categoryId = $_POST['categoryId'];
+    $categoryName = $_POST['categoryName'];
+    $categoryType = $_POST['categoryType'];
 
-if(isset ($_GET["updateId"])) {
-  if(isset($_POST["submit"])) {
-    $categoryId = $_POST["categoryId"];
-    $categoryName = $_POST["categoryName"];
-    $categoryType = $_POST["categoryType"];
+    $sql= "UPDATE category SET category_name='$categoryName', category_type='$categoryType',updated_at=NOW() WHERE category_id='$categoryId'";
+    $res = mysqli_query($conn, $sql);
 
-    $sql = "UPDATE category SET `category_name`='$categoryName',
-            `category_type`='$categoryType' WHERE `category_id`='$categoryId'" ;
-    $res = mysql_query($sql) or trigger_error(mysql_error()." in ".$sql);
-
-    if($res) {
-        echo "<script>alert('Category has been updated');
-                window.location.href='categories.php';  
-            </script>";
-        
-    } 
+    if($res)
+    {
+      echo "<script>alert('Category has been updated');
+            window.location.href='categories.php';  
+          </script>";
+    } else {
+      echo "<script>alert('Category has not updated');
+            window.location.href='categories.php';  
+          </script>";
+    }
   }
 ?>
 
@@ -53,7 +57,7 @@ if(isset ($_GET["updateId"])) {
           <h4 class="card-title">Update Category</h4>
           <hr class="my-4">
 
-          <form method="POST" action="category-update.php">
+          <form method="POST" action="category-update.php?updateId=<?php echo $_GET["updateId"]; ?>">
           <?php
             $sql=mysqli_query($conn, "select * from category where category_id='".$_GET["updateId"]."'");
             while($data=mysqli_fetch_array($sql, MYSQLI_BOTH))

@@ -1,5 +1,6 @@
-<?php include('connection.php'); 
-
+<?php 
+session_start();
+include('connection.php'); 
 if(isset ($_GET["updateId"])) {
   if(isset($_POST["submit"])) {
     $id = $_POST["id"];
@@ -10,7 +11,9 @@ if(isset ($_GET["updateId"])) {
     $productsize = $_POST["productsize"];
     $productimage = $_POST["productimage"];
 
-    $sql (mysqli_query($conn, "UPDATE jersey Set brand_id='$brand', category_id='$category', jersey_price='$price', jersey_name='$productname', jersey_size='$productsize', jersey_image='$productimage', updated_at=NOW() WHERE jersey_id='$id'"));
+    $sql = ("UPDATE jersey Set brand_id='$brand', category_id='$category', jersey_price='$price', jersey_name='$productname', jersey_size='$productsize', jersey_image='$productimage', updated_at=NOW() WHERE jersey_id='$id'");
+    $res = mysqli_query($conn, $sql);
+
 
       if($sql) {
           echo "<script>alert('Product has been updated');
@@ -56,7 +59,7 @@ if(isset ($_GET["updateId"])) {
           <h4 class="card-title">Update Product</h4>
           <hr class="my-4">
 
-          <form method="POST" action="product-update.php">
+          <form method="POST" action="product-update.php?updateId=<?php echo $_GET["updateId"]; ?>">
           <?php
             $sql=mysqli_query($conn, "select * from jersey where jersey_id='".$_GET["updateId"]."'");
             while($data=mysqli_fetch_array($sql, MYSQLI_BOTH))
