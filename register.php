@@ -19,7 +19,7 @@
         input[type=number]{
         -moz-appearance: textfield;
         }
-    </style>s
+    </style>
 
     <?php include('layouts/header.php') ?>
   </head>

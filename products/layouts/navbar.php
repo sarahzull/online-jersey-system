@@ -25,8 +25,7 @@
       <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-          <a href="/" class="nav-link">Home</a>
-          <a href="/products/" class="nav-link">Products</a>
+          <a href="/products" class="nav-link">Home</a>
           <a href="account.php" class="nav-link">Profile</a>
           <a href="/logout.php" class="nav-link"><i class="fa-solid fa-arrow-right-from-bracket"></i></a>
           <a href="cart.php" class="nav-link"><i class="fa-solid fa-basket-shopping"></i></a>
