@@ -20,6 +20,7 @@ if (!conn) {
 			$_SESSION["username"] = $row["user_name"];
 			$_SESSION["id"] = $row["user_id"];
 			$_SESSION["role"] = $row["role_id"];
+			$_SESSION["addcart"] = 0;
 
 			if ($_SESSION["role"] == 3) {
 				header("Location:/products");
