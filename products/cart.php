@@ -45,7 +45,8 @@ include('connection.php');
             <tr>
               <td class="text-left">
                   <p><?php echo $data['jersey_name'];?></p>
-                  <small>Price: RM<?php echo $data['jersey_price'];?></small>
+                  <p class="font-weight-light">Price: RM<?php echo $data['jersey_price'];?></p>
+                  <small><a href="remove.php?id=<?php echo $data['id']; ?>" class="text-decoration-none">Remove</a></small>
               </td>
 
               <td class="text-center">
@@ -55,6 +56,7 @@ include('connection.php');
               <td class="text-center">
                 RM<?php echo $data['Total'];?>
               </td>
+              <br>
             <?php
               $count++;
               }
