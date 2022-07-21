@@ -17,7 +17,7 @@
               <nav>
                <ul id="MenuItems">
                    <li><a href="index.php">Home</a></li>
-                   <li><a href="products.php">Products</a></li>
+                   <li><a href="/products/">Products</a></li>
                    <li><a href="account.php">Account</a></li>
                </ul>
               </nav>

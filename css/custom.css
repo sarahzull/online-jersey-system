@@ -1,0 +1,21 @@
+
+.container-navbar {
+  max-width: 1300px;
+  margin: auto;
+  padding-left: 25px;
+  padding-right: 25px;
+}
+
+a {
+  color: #555 !important;
+}
+
+a:hover {
+  color: #ccc !important;
+}
+
+.dataTables_filter {
+  width: 50%;
+  float: right;
+  text-align: right;
+}

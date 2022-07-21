@@ -54,13 +54,12 @@
 
                     <td>
                     <?php
-                    $ordersId = $data['orders_id'];
-                    $sql1 = "SELECT j.jersey_name, j.jersey_price, o.orders_id, d.quantity FROM `order_details` d JOIN `jersey` j ON j.jersey_id=d.jersey_id JOIN `orders` o ON o.orders_id=d.orders_id WHERE o.orders_id=$ordersId AND o.status=1";
+                    $orderId = $data['orders_id'];
+                    $sql1 = "SELECT j.jersey_name, j.jersey_price, o.orders_id, d.quantity FROM `order_details` d JOIN `jersey` j ON j.jersey_id=d.jersey_id JOIN `orders` o ON o.orders_id=d.orders_id WHERE o.orders_id=$orderId AND o.status=1";
                     
                     $qry1=mysqli_query($conn,$sql1);
-                    //$row1=mysqli_num_rows($qry1);
                     
-                    if((mysqli_num_rows($qry)) > 0) 
+                    if($row > 0) 
                     {
                       while($data1 = mysqli_fetch_array($qry1)) 
                       {

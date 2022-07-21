@@ -1,38 +1,56 @@
-<?php
-session_start();
-/* include db connection file */
-include("connection.php");
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
 
-/* capture values from HTML form */
-$username = $_POST['username'];
-$password = $_POST['password'];	
+    <?php include('layouts/header.php') ?>
+  </head>
+  <body class="bg-light">
+      <?php include('layouts/navbar.php'); ?> 
 
-if($username == "admin" && $password == "admin"){
-	$_SESSION['username'] = "Administrator";	
-	header("Location: /admin");
-}
-else{
-	/* execute SQL command */
-	$sql = "SELECT * FROM user WHERE user_name = '$username'
-			AND user_password = '$password'";
-	echo $sql;
-	$query = mysqli_query($dbconn, $sql) or die("Error: " . mysqli_error($dbconn));
-	$row = mysqli_num_rows($query);
-	if($row == 0){
-		echo "Invalid Username/Password. Click here to <a href='account.php'>login</a>.";
-	}
-	else{
-		$r = mysqli_fetch_assoc($query);
-		$_SESSION['user_name'] = $r['user_name'];
-		$_SESSION['user_password'] = $r['user_password'];
-		header("Location:index.php");
-	}
-} 
+       <div class="container">
+          <div class="row justify-content-center">
+          <div class="col-md-7">
+          <div class="card">
+            <div class="card-header">
+              Login
+            </div>
+            <div class="card-body">
+            <form method="POST" action="login-verify.php">
+            <label for="username" class="form-label">Username</label>
+            <div class="input-group mb-3">
+            <span class="input-group-text" id="username"><i class="fa fa-user"></i></span>
+            <input type="text" class="form-control" id="username" name="username" placeholder="Enter username" autofocus="" required>
+            </div>   
 
-if(isset($_POST['btn'])){
-	
-} else {
-	echo "hello";
-}
-mysqli_close($dbconn);
-?>
+            <label for="password" class="form-label">Password</label>
+            <div class="input-group mb-3">
+            <span class="input-group-text" id="password"><i class="fa fa-lock"></i></span>
+            <input type="password" class="form-control" id="password" name="password" placeholder="Enter password" autofocus="" required>
+            </div> 
+
+            <div class="row">
+                <div class="col">
+                    <button type="submit" class="btn btn-success px-4">
+                        Login
+                    </button>
+                    <p class="text-muted mt-2">Don't have an account yet? <a href="register.php">Create an account</a></p>
+                </div>
+                
+            </div>
+            </div>
+              </form>
+            </div>
+        </div>
+          </div>
+        </div>
+      </div>
+
+    <?php include('layouts/footer.php'); ?>
+    
+  </body>
+</html>

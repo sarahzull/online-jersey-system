@@ -167,7 +167,9 @@ small{
 /*--------------------testimonial---------------*/
 
 .testimonial{
-    padding-top: 100px;
+    background: radial-gradient(#fff,#ffd6d6);
+    margin-top: 80px;
+    padding: 30px 0;
 }
 
 .testimonial .col-3{

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jul 18, 2022 at 04:31 PM
+-- Generation Time: Jul 21, 2022 at 04:15 AM
 -- Server version: 8.0.28
 -- PHP Version: 7.4.19
 
@@ -30,7 +30,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `brand` (
   `brand_id` int NOT NULL,
   `brand_name` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `brand`
@@ -50,20 +50,20 @@ INSERT INTO `brand` (`brand_id`, `brand_name`) VALUES
 
 CREATE TABLE `category` (
   `category_id` int NOT NULL,
-  `category_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `category_type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `category_name` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
+  `category_type` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `category`
 --
 
 INSERT INTO `category` (`category_id`, `category_name`, `category_type`, `created_at`, `updated_at`) VALUES
-(1, 'player issue', 'unisex', NULL, NULL),
-(2, 'fans issue', 'unisex', NULL, NULL),
-(4, 'test', 'Unisex', '2022-07-05 13:59:00', NULL);
+(1, 'player issue', 'unisex', NULL, '2022-07-20 13:24:58'),
+(2, 'fans issue', 'unisex', NULL, '2022-07-20 13:25:05'),
+(4, 'testrrrr', 'Unisex', '2022-07-05 13:59:00', '2022-07-20 13:27:37');
 
 -- --------------------------------------------------------
 
@@ -76,12 +76,12 @@ CREATE TABLE `jersey` (
   `brand_id` int NOT NULL,
   `category_id` int NOT NULL,
   `jersey_price` int DEFAULT NULL,
-  `jersey_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `jersey_size` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `jersey_image` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `jersey_name` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
+  `jersey_size` varchar(100) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
+  `jersey_image` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `jersey`
@@ -120,7 +120,7 @@ CREATE TABLE `orders` (
   `orders_date` date DEFAULT NULL,
   `proof` longblob,
   `status` int NOT NULL DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `orders`
@@ -144,7 +144,7 @@ CREATE TABLE `order_details` (
   `orders_id` int DEFAULT NULL,
   `quantity` int DEFAULT NULL,
   `total_price` decimal(5,2) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `order_details`
@@ -171,7 +171,7 @@ CREATE TABLE `payment` (
   `payment_id` int NOT NULL,
   `orders_id` int DEFAULT NULL,
   `payment_status` varchar(100) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -182,7 +182,7 @@ CREATE TABLE `payment` (
 CREATE TABLE `role` (
   `role_id` int NOT NULL,
   `role_tittle` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `role`
@@ -206,7 +206,7 @@ CREATE TABLE `user` (
   `user_address` varchar(255) NOT NULL,
   `user_password` varchar(255) NOT NULL,
   `user_email` varchar(200) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `user`
