@@ -27,8 +27,8 @@
       <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
           <a href="/products" class="nav-link">Home</a>
           <a href="account.php" class="nav-link">Profile</a>
-          <a href="/logout.php" class="nav-link"><i class="fa-solid fa-arrow-right-from-bracket"></i></a>
           <a href="cart.php" class="nav-link"><i class="fa-solid fa-basket-shopping"></i></a>
+          <a href="/logout.php" class="nav-link"><i class="fa-solid fa-arrow-right-from-bracket"></i></a>
       </div>
   </div>
 </nav>
