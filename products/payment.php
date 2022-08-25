@@ -73,7 +73,7 @@ include('connection.php')
               <input type=hidden value="<?php echo $d['orders_id'];?>" name="orders_id">
               <input class="img" type="file" id="proof" accept="image/jpeg" name="proof">        
               
-              <p><button type="button" class="btn btn-success btn-sm btn-block mt-4" type="submit" name="submit">Proceed</button></p>
+              <p><button class="btn btn-success btn-sm btn-block mt-4" type="submit" name="submit">Proceed</button></p>
 
               </form> 
               <?php

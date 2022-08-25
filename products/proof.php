@@ -16,7 +16,7 @@ if(isset($_POST['submit']))
         $image = $_FILES['proof']['tmp_name'];
         $imgContent = addslashes(file_get_contents($image));
         
-        $insert = $conn->query("UPDATE orders SET proof= '".$imgContent."' WHERE orders_id = $orderId");
+        $insert = mysqli_query($conn, "UPDATE orders SET proof= '".$imgContent."' WHERE orders_id = $orderId");
         if($insert)
         {
           echo"<script language='javascript'>alert('Upload success!');window.location='invoice.php';</script>";

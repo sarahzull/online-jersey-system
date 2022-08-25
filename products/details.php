@@ -1,23 +1,21 @@
 <?php 
 session_start();
 include('connection.php');
-if(isset ($_GET["Id"])) {
 
+if(isset ($_GET["Id"])) {
   if($_SESSION['addcart']==0) {
-    $sql1 = "INSERT INTO `orders` (`user_id`, `orders_date`) VALUES ('1001',NOW())";
+    $sql1 = "INSERT INTO `orders` (`user_id`, `orders_date`) VALUES ('". $_SESSION['id']."',NOW())";
     mysqli_query($conn,$sql1);
     $_SESSION['addcart']=1;
   }
 
   if(isset($_POST['submit'])) {		
     $id = $_GET["Id"];
-    $category = $_POST['category'];
     $quantity = $_POST['quantity'];
     $pID = "SELECT j.jersey_id, j.jersey_name from jersey j JOIN order_details d ON j.jersey_id=d.jersey_id WHERE j.jersey_id=$id";
     $orderId = "SELECT orders_id FROM orders ORDER BY orders_id DESC LIMIT 1";
 
-    $sql = "INSERT INTO `order_details` (`orders_id`, `jersey_id`, `quantity`) VALUES ('$orderId', '$id', '$quantity'))";
-    //$sql = "INSERT INTO order_detail(orders_id, jersey_id, quantity) VALUES ((SELECT orders_id FROM orders ORDER BY orders_id DESC LIMIT 1), (SELECT jersey_id FROM jersey WHERE jersey_id=$id), $quantity)";
+    $sql = "INSERT INTO `order_details` (`orders_id`, `jersey_id`, `quantity`) VALUES ('1004', '$id', '$quantity'))";
     $res = mysqli_query($conn,$sql);
 
     if(!$res) {
@@ -28,7 +26,7 @@ if(isset ($_GET["Id"])) {
             window.location='/products/';</script>";
     }
   }
-?>
+  ?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -48,7 +46,7 @@ if(isset ($_GET["Id"])) {
         <div class="card-body">
         <form method="POST" action="details.php?Id=<?php echo $_GET["Id"]; ?>">
         <?php
-          $sql=mysqli_query($conn, "select * from jersey where jersey_id='".$_GET["Id"]."'");
+          $sql=mysqli_query($conn, "SELECT c.category_id, c.category_name, j.* FROM jersey j JOIN category c ON c.category_id=j.category_id where jersey_id='".$_GET["Id"]."'");
           while($data=mysqli_fetch_array($sql, MYSQLI_BOTH))
           {
             $path = $data['jersey_image'];
@@ -69,27 +67,23 @@ if(isset ($_GET["Id"])) {
             <h2>
               <strong><?php echo $data['jersey_name'];?></strong>
             </h2>
+
             <p>
               <h5>RM<?php echo $data['jersey_price'];?></h5>
             </p>
+
             <p>
-              Size: <?php echo $data['jersey_size']; ?>
+              <strong>Size: </strong><?php echo $data['jersey_size']; ?>
             </p>
+            
             <p>
-              <select class="custom-select custom-select-md" style="width: 50%;" name="category">
-              <?php $sql = mysqli_query($conn, "select * from category");?>
-                <option>Select Category</option>
-                <?php while($data=mysqli_fetch_array($sql, MYSQLI_BOTH)) { ?>
-                    <option value="<?php echo $data['category_id']; ?>"><?php echo $data['category_name']; ?></option>
-                <?php
-                  }
-                ?>
-              </select>
+              <strong>Category: </strong><?php echo $data['category_name']; ?>
             </p>
+
             <p>
-            <p>
-              Quantity: <input type="number" class="form-control" style="width: 20%;" id="quantity" name="quantity" value="1" min="1">
+              <strong>Quantity: </strong> <input type="number" class="form-control" style="width: 20%;" id="quantity" name="quantity" value="1" min="1">
             </p>
+
             <button class="btn btn-primary btn-md" type="submit" name="submit">Add to Cart</button>
             </div>
           </div>
@@ -103,4 +97,6 @@ if(isset ($_GET["Id"])) {
     
   </body>
 </html>
-<?php } ?>
+<?php 
+  } 
+?>
